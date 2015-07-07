@@ -34,9 +34,9 @@ public void onCreate(Bundle savedInstanceState) {
        map = (MapView) findViewById(R.id.openmapview);
        map.setTileSource(TileSourceFactory.MAPQUESTOSM);
 
-     //  myPath= new PathOverlay(Color.RED, this);
-      // map.setBuiltInZoomControls(true);
-      // map.setMultiTouchControls(true);
+       myPath= new PathOverlay(Color.RED, this);
+       map.setBuiltInZoomControls(true);
+       map.setMultiTouchControls(true);
       
        
        IMapController mapController = map.getController();
@@ -88,8 +88,8 @@ public void onLocationChanged(Location location) {
     int longitude = (int) (location.getLongitude() * 1E6);
     GeoPoint geopoint = new GeoPoint(latitude, longitude);
     mapController.setCenter(geopoint);
-  //  myPath.addPoint(geopoint);
-   // map.getOverlays().add(myPath);
+    myPath.addPoint(geopoint);
+    map.getOverlays().add(myPath);
     map.invalidate();
 }
 
