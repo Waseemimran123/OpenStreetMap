@@ -34,15 +34,19 @@ public void onCreate(Bundle savedInstanceState) {
        map = (MapView) findViewById(R.id.openmapview);
        map.setTileSource(TileSourceFactory.MAPQUESTOSM);
 
-       myPath= new PathOverlay(Color.RED, this);
-       map.setBuiltInZoomControls(true);
-       map.setMultiTouchControls(true);
+     //  myPath= new PathOverlay(Color.RED, this);
+      // map.setBuiltInZoomControls(true);
+      // map.setMultiTouchControls(true);
+      
+       
        IMapController mapController = map.getController();
-       mapController.setZoom(12);
+       mapController.setZoom(15);
+       GeoPoint startPoint = new GeoPoint(31.5622,74.3232);
+       mapController.setCenter(startPoint);
        myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
        myLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 100, this);
-       GeoPoint startPoint = new GeoPoint(48.8583, 2,2944);
-       mapController.setCenter(startPoint);
+      // GeoPoint startPoint = new GeoPoint(48.8583, 2,2944);
+     
    
 
 //
@@ -73,14 +77,9 @@ public void onCreate(Bundle savedInstanceState) {
 		}).start();
 
 
-
-
-
-
-
-
-
 }
+
+
 
 @Override
 public void onLocationChanged(Location location) {
@@ -89,8 +88,9 @@ public void onLocationChanged(Location location) {
     int longitude = (int) (location.getLongitude() * 1E6);
     GeoPoint geopoint = new GeoPoint(latitude, longitude);
     mapController.setCenter(geopoint);
-    myPath.addPoint(geopoint);
-    map.getOverlays().add(myPath);
+  //  myPath.addPoint(geopoint);
+   // map.getOverlays().add(myPath);
+    map.invalidate();
 }
 
 @Override
